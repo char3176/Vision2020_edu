@@ -21,6 +21,19 @@ percentArcLength=0.01
 epsilon = percentArcLength*cv.arcLength(cnt, True)
 approx = cv.approxPolyDP(cnt, epsilon, True)
 
+#approx = []
+#percentArcLength = 1
+#while len(approx) != 8:
+#    percentArcLength = percentArcLength/2
+#    print(percentArcLength)
+#    epsilon = percentArcLength*cv.arcLength(cnt, True)
+#    approx = cv.approxPolyDP(cnt, epsilon, True)
+#    canvas = img.copy()
+#    cv.drawContours(canvas, approx, -1, (0, 255, 0), 3)
+#    cv.imshow('check len', canvas)
+#    cv.waitKey(0)
+
+
 cv.drawContours(canvas, approx, -1, (0, 255, 0), 3)
 cv.imshow('Points', canvas)
 cv.waitKey(0)
@@ -35,3 +48,11 @@ print(approx)
 
 #Try "percentArcLength" = 0.1, 0.05, 0.01, 0.001
 
+
+# get "image moments" from contour
+M = cv.moments(cnt)
+centroid_x = int(M['m10']/M['m00'])
+centroid_y = int(M['m01']/M['m00'])
+# Centroid x,y coords should correspond to roughly: 254, 314
+
+# filter to get
